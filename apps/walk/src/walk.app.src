@@ -1,0 +1,12 @@
+{application, walk,
+ [
+  {description, "Simple Random Walk"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { walk_app, []}},
+  {env, []}
+ ]}.
