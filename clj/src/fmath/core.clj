@@ -1,4 +1,4 @@
-(ns fmath
+(ns fmath.core
   (:use clojure.contrib.json)
   (:gen-class))
 
@@ -24,14 +24,16 @@
       (let [next (step acc up dn)]
         (recur (conj result next) (dec count) next)))))
 
-(defn default-walk []
-  (let [result (walk 100 50 1.01, 0.99)]
+(defn default-walk [steps]
+  (let [result (walk steps 100 1.05, 0.95)]
     (loop [acc [] x 0 ycol result]
       (if (empty? ycol)
         acc
         (recur (conj acc [x (first ycol)]) (inc x) (rest ycol))))))
 
-(defn -main [&args]
-  (json-str (default-walk)))
+(defn json-default-walk [steps]
+  (json-str (default-walk steps)))
 
-(-main nil)
+(defn -main [& args]
+  (apply json-default-walk args))
+

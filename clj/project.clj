@@ -8,5 +8,5 @@
   :license {:name "MIT"}
   :dependencies [[org.clojure/clojure "1.2.1"]
                  [org.clojure/clojure-contrib "1.2.0"]]
-  :main fmath
+  :main fmath.core
   :dev-dependencies [[org.clojars.brandonw/lein-nailgun "1.0.1"]])
