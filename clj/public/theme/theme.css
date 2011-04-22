@@ -84,8 +84,6 @@ body {
 .chart {
     margin: 0 auto;
     width: 80%;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    padding-left: 2em;
-    padding-right: 2em;
+    margin-top: 2em;
+    margin-bottom: 1em;
 }
