@@ -7,6 +7,10 @@
   :url "http://blog.ericwhite.ca"
   :license {:name "MIT"}
   :dependencies [[org.clojure/clojure "1.2.1"]
-                 [org.clojure/clojure-contrib "1.2.0"]]
+                 [org.clojure/clojure-contrib "1.2.0"]
+                 [ring/ring-core "0.3.7"]
+                 [ring/ring-jetty-adapter "0.3.7"]
+                 [compojure "0.6.2"]
+                 [com.github.spullara.mustache.java/compiler "0.4-SNAPSHOT"]]
   :main fmath.core
   :dev-dependencies [[org.clojars.brandonw/lein-nailgun "1.0.1"]])
