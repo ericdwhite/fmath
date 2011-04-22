@@ -1,0 +1,91 @@
+
+body {
+    font-family: arial,helvetica,sans-serif;
+    font-size: 1em;
+    color: #555555;
+}
+
+#header {
+    height: 100px;
+    background: #000 url('./header-bg.png');
+    border-bottom: 2px #101010 solid;
+}
+#header h1 {
+    padding-top: 20px;
+    padding-left: 20px;
+    font-size: 50px; 
+    color: #fff;
+}
+
+#container {
+    margin: 0 auto;
+    padding-top: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 2em;
+    width: 980px;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+}
+
+#footer {
+    margin: 0 auto;
+    padding-right: 0.7em;
+    padding-top: 0.7em;
+    border-top: 1px solid #101010;
+    text-align: right;
+    font-size: 0.8em;
+}
+
+.heading {
+    font-size: 1.5em;
+    font-family: arial,helvetica,sans-serif;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+.box {
+    margin-bottom: 1em;
+}
+.boxhead {
+    padding: 0.5em;
+    background: #eee;
+    border: 1px solid #bbb;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.bh-collapsed {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.bh-expanded {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.boxhead .trigger {
+    float: right;
+}
+.boxhead span {
+    color: #000;
+    margin-right: 0.5em;
+}
+.boxcontent {
+    padding: 0.5em;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.boxcontent p {
+    margin-bottom: 0.5em;
+}
+
+.chart {
+    margin: 0 auto;
+    width: 80%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
