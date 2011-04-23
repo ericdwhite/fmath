@@ -2,3 +2,4 @@ rel/walk
 rel/files
 ebin
 .*swp
+clj/fmath-*.jar

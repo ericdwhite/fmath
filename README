@@ -1,1 +1,11 @@
 Some sample Clojure code while I work through Paul Wilmott - Introduces Quantitative Finace.
+
+
+Getting Started
+---------------
+cd clj
+lein deps
+LEIN_SNAPSHOTS_IN_RELEASE=true lein jar
+java -cp fmath-0.0.1.jar:lib/* fmath.core
+
+Then in your browser navigate to: http://127.0.0.1:8080/
