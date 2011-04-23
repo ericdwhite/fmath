@@ -1,14 +1,16 @@
 (ns fmath.randwalk
   (:use clojure.contrib.json))
 
-(defn frand []
-  (rand))
-
 (defn flip
-  ([] (flip frand)) 
-  ([fr] (let [r (fr)]
+  "Uses frand to obtain a number from 0 inclusive,
+  to 1 exclusive, and then compares that to the
+  limit to determine head or tails.  Adjusting
+  the limit is changes the number of heads vs. 
+  tails."
+  ([] (flip rand 0.5)) 
+  ([frand limit] (let [r (frand)]
           (cond
-            (> r 0.5) true
+            (>= r limit) true
             :else false))))
 
 (defn step [cur, up, dn]
@@ -16,22 +18,21 @@
     (* cur up)
     (* cur dn)))
 
-(defn walk [steps, start, up, dn]
-  (loop [result [] cnt steps acc start]
-    (if (zero? cnt)
-      result
-      (let [next (step acc up dn)]
-        (recur (conj result next) (dec cnt) next)))))
+(defn pace [up, dn]
+  #(step % up dn))
 
+(defn walk [steps, start, up, dn]
+  (take steps (iterate (pace up dn) start)))
+
+;;
+;; Used for creating results sets to 
+;; display on the graph.
 (defn default-walk [steps]
   "Runs a basic walk with a starting point
-  of 100 and 5% change up or down."
-  (let [result (walk steps 100 1.05, 0.95)]
-    (loop [acc [] x 0 ycol result]
-      (if (empty? ycol)
-        acc
-        (recur (conj acc [x (first ycol)]) (inc x) (rest ycol))))))
-
+  of 50 and 8% change up or down."
+  (map #(vector %1 %2) 
+       (iterate inc 0)
+       (walk steps 50 1.08 0.92)))
+       
 (defn json-default-walk [steps]
   (json-str (default-walk steps)))
-

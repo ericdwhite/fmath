@@ -5,4 +5,5 @@
   (:gen-class))
 
 (defn -main [& args]
-  (run-server {:port 8080}))
+  (run-server {:host "127.0.0.1",
+               :port 8080}))
