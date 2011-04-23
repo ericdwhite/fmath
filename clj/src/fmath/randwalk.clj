@@ -22,10 +22,10 @@
       result
       (let [next (step acc up dn)]
         (recur (conj result next) (dec cnt) next)))))
-;;
-;; Runs a basic walk with a start point of 100
-;; and 5% change.
+
 (defn default-walk [steps]
+  "Runs a basic walk with a starting point
+  of 100 and 5% change up or down."
   (let [result (walk steps 100 1.05, 0.95)]
     (loop [acc [] x 0 ycol result]
       (if (empty? ycol)
@@ -34,5 +34,4 @@
 
 (defn json-default-walk [steps]
   (json-str (default-walk steps)))
-
 
