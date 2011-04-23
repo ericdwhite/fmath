@@ -5,16 +5,28 @@ body {
     color: #555555;
 }
 
+ul {
+}
+
+li {
+    background: url('./bullet.png') no-repeat left;
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
+    padding-left: 1em;
+}
+
 #header {
     height: 100px;
     background: #000 url('./header-bg.png');
-    border-bottom: 2px #101010 solid;
+    border-bottom: 2px #3b588f solid;
 }
 #header h1 {
     padding-top: 20px;
     padding-left: 20px;
     font-size: 50px; 
+    text-shadow: none; 
     color: #fff;
+    text-shadow: 1px 1px 1px #111;
 }
 
 #container {
