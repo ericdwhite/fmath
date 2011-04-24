@@ -152,6 +152,15 @@ def create_revision():
     """
     _init();
 
+    if env.has_key('archive'):
+        archive = _get_attr('archive')
+        _status("Archive: %s"  % archive)
+        return archive
+
+    #
+    # The following is specific to this project
+    # and would need to be changed if this file is
+    # used for anything else.
     import tempfile
     import datetime
     tempdir = tempfile.mktemp();
@@ -162,13 +171,14 @@ def create_revision():
         repo = _get_attr('repo')
         branch = _get_attr('repo_branch')
         local("git clone %s repo" % repo)
-        local("git checkout %s" % branch)
         with lcd('repo/clj'):
+            local("git checkout %s" % branch)
             local('lein deps')
             local('LEIN_SNAPSHOTS_IN_RELEASE=true lein jar')
             local('git rev-list --max-count=1 HEAD > REVISION')
             local("tar -czf %s `cat FILES`" % archive)
             _status("Archive: %s"  % archive)
+            env.archive = archive
             return archive
 
 
