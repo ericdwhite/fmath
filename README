@@ -9,3 +9,21 @@ LEIN_SNAPSHOTS_IN_RELEASE=true lein jar
 java -cp fmath-0.0.1.jar:lib/* fmath.core
 
 Then in your browser navigate to: http://127.0.0.1:8080/
+
+
+Packaging (Uses Fabric)
+-----------------------
+fab -c _fabricrc -H <remote host> -U <remote user> setup
+fab -c _fabricrc -H <remote host> -U <remote user> create_revision
+
+
+Side Note: Installing Fabric (min 1.0.1)
+----------------------------------------
+I carried out these steps on my development box.  The host
+server doesn't need to have Fabric installed.
+
+Note: the script require at least version 1.0.0 (0.9.0 will
+not work.
+
+sudo apt-get install python-dev pip
+sudo pip install --upgrade fabric

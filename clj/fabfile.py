@@ -1,6 +1,7 @@
 import sys
 import os
-from fabric.api import run
+from fabric.api import run, local
+from fabric.context_managers import lcd, cd
 from fabric.utils import abort
 from fabric.state import output, env
 
@@ -128,4 +129,23 @@ def setup():
     run("mkdir -p %(releases_path)s" % env)
     run("mkdir -p %(public_path)s" % env)
     run("tree %(site_root)s" % env)
+
+def create_revision():
+    _init();
+
+    import tempfile
+    tempdir = tempfile.mktemp();
+    archive_date = datetime.datetime.utcnow().isoformat('_').replace('-', '').replace(':', '').split('.')[0]
+    archive = "fmath-%s.tar.gz" % archive_date
+    local("mkdir -p %s" % tempdir)
+    with lcd(tempdir):
+        repo = _get_attr('repo')
+        local("git clone %s repo" % repo)
+        with lcd('repo/clj'):
+            local('lein deps')
+            local('LEIN_SNAPSHOTS_IN_RELEASE=true lein jar')
+            local('git rev-list --max-count=1 HEAD > REVISION')
+            local("tar -cf %s `cat FILES`" % archive)
+
+
 
