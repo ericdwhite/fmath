@@ -8,6 +8,7 @@ releases_path = releases
 shared_path = shared
 current_path = current
 logs_path = shared/logs 
+tmp_path = tmp
 
 # Accessible locally
 repo = git@github.com:ericdwhite/fmath.git
