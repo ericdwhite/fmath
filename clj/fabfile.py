@@ -49,7 +49,7 @@ def info():
     """
     print
 
-    print "site_root = /home/wsite/webapp_name"
+    print "site_root = /app/webapp_name"
     print """
           All other directories will be created under this root.  This allows
           for multiple applications to be deployed on the same host.
@@ -94,6 +94,17 @@ def info():
           be exposed to a webserver directly.
           """
 
+    print "repo = git@github.com:ericdwhite/fmath.git"
+    print """
+          Repository: A repository accessible from the deployment machine.
+          """
+
+    print "repo_branch = live"
+    print """
+          Repository Branch: The branch to clone from the repository. 
+          """
+
+
 def _init():
     if not env.has_key('inited'):
         _status("Initializing.")
@@ -104,7 +115,9 @@ def _get_attr(attr):
     try:
         return env[attr]
     except NameError:
-        abort("RCFILE/env does not define: " % attr)
+        abort("RCFILE/env does not define: %s" % attr)
+    except KeyError:
+        abort("RCFILE/env does not define: %s" % attr)
 
 def _merge_paths():
     site_root = _get_attr('site_root')
@@ -131,21 +144,32 @@ def setup():
     run("tree %(site_root)s" % env)
 
 def create_revision():
+    """
+    Creates a tar.gz of the project to be transfered to
+    the remote host.  This method creates a temporary
+    directory to work with a clean clone of the repository.
+    This avoids accidently deploying something not checked in.
+    """
     _init();
 
     import tempfile
+    import datetime
     tempdir = tempfile.mktemp();
     archive_date = datetime.datetime.utcnow().isoformat('_').replace('-', '').replace(':', '').split('.')[0]
-    archive = "fmath-%s.tar.gz" % archive_date
+    archive = os.path.join(tempdir, "fmath-%s.tar.gz" % archive_date)
     local("mkdir -p %s" % tempdir)
     with lcd(tempdir):
         repo = _get_attr('repo')
+        branch = _get_attr('repo_branch')
         local("git clone %s repo" % repo)
+        local("git checkout %s" % branch)
         with lcd('repo/clj'):
             local('lein deps')
             local('LEIN_SNAPSHOTS_IN_RELEASE=true lein jar')
             local('git rev-list --max-count=1 HEAD > REVISION')
-            local("tar -cf %s `cat FILES`" % archive)
+            local("tar -czf %s `cat FILES`" % archive)
+            _status("Archive: %s"  % archive)
+            return archive
 
 
 

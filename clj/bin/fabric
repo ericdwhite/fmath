@@ -1,0 +1,4 @@
+#!/bin/sh
+TFILE="/tmp/$(basename $0).$$.tmp"
+cat _fabricrc .fabricrc > $TFILE
+fab -c $TFILE $@

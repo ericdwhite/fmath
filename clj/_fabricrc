@@ -2,7 +2,7 @@
 # user = www
 
 # Specific variables for use with this fabfile.
-site_root = /app/fmath
+# site_root = /app/fmath
 public_path = public
 releases_path = releases
 shared_path = shared
@@ -11,4 +11,4 @@ logs_path = shared/logs
 
 # Accessible locally
 repo = git@github.com:ericdwhite/fmath.git
-
+repo_branch = live
