@@ -1,0 +1,10 @@
+# Provide a default external user.
+user = wsite
+
+# Specific variables for use with this fabfile.
+site_root = /home/wsite/fmath
+public_path = public
+releases_path = releases
+shared_path = shared
+current_path = current
+logs_path = shared/logs 
