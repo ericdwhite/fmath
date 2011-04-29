@@ -2,3 +2,5 @@ classes
 lib
 *.pyc
 .fabricrc
+*.log
+TODO
