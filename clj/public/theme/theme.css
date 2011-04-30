@@ -15,6 +15,11 @@ li {
     padding-left: 1em;
 }
 
+#header-outer {
+    height: 100px;
+    background: url('./header-thumb.png') no-repeat;
+}
+
 #header {
     height: 100px;
     background: #000 url('./header-bg.png');
@@ -22,7 +27,7 @@ li {
 }
 #header h1 {
     padding-top: 20px;
-    padding-left: 20px;
+    padding-left: 150px;
     font-size: 50px; 
     text-shadow: none; 
     color: #fff;
