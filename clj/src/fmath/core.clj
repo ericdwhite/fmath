@@ -22,7 +22,7 @@
 (defn- request-log-hander []
   "See: 
     http://jetty.codehaus.org/jetty/jetty-6/apidocs/org/mortbay/jetty/NCSARequestLog.html"
-  (let [log (new NCSARequestLog "jetty-yyyy_mm_dd.request.log")
+  (let [log (new NCSARequestLog "logs/jetty-yyyy_mm_dd.request.log")
         handler (new RequestLogHandler)]
     (doto log
       (.setRetainDays 90)
@@ -44,3 +44,4 @@
 
 (defn -main [& args]
   (server true log-configurator))
+
