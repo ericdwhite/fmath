@@ -207,7 +207,7 @@ def create_revision():
             local('lein deps')
             local('LEIN_SNAPSHOTS_IN_RELEASE=true lein jar')
             local('git rev-list --max-count=1 HEAD > REVISION')
-            local("REV=`cat REVISION` echo \"<a href=\"https://github.com/ericdwhite/fmath/tree/${REV}\">github://ericdwhite/fmath ${REF}</a>\" > template/revision.html")
+            local("REV=`cat REVISION | head -1` && echo \"<a href=\\\"https://github.com/ericdwhite/fmath/tree/${REV}\\\">github://ericdwhite/fmath ${REV}</a>\" > template/revision.html")
             local('git branch >> REVISION')
             local("tar -czf %s `cat FILES`" % archive)
             _status("Archive: %s"  % archive)
