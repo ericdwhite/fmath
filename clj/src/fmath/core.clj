@@ -19,10 +19,13 @@
 (defn app-port []
   (Integer/parseInt (get (System/getenv) "APP_PORT" "8080")))
 
+(defn app-logs[]
+  (get (System/getenv) "APP_LOGS" "logs"))
+
 (defn- request-log-hander []
   "See: 
     http://jetty.codehaus.org/jetty/jetty-6/apidocs/org/mortbay/jetty/NCSARequestLog.html"
-  (let [log (new NCSARequestLog "logs/jetty-yyyy_mm_dd.request.log")
+  (let [log (new NCSARequestLog (str (app-logs) "/jetty-yyyy_mm_dd.request.log"))
         handler (new RequestLogHandler)]
     (doto log
       (.setRetainDays 90)
