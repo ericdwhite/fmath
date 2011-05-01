@@ -13,8 +13,7 @@ Then in your browser navigate to: http://127.0.0.1:8080/
 
 Packaging (Uses Fabric)
 -----------------------
-fab -c _fabricrc -H <remote host> -U <remote user> setup
-fab -c _fabricrc -H <remote host> -U <remote user> create_revision
+See: clj/FABRIC.md
 
 
 Side Note: Installing Fabric (min 1.0.1)
