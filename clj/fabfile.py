@@ -206,6 +206,7 @@ def create_revision():
             local('lein deps')
             local('LEIN_SNAPSHOTS_IN_RELEASE=true lein jar')
             local('git rev-list --max-count=1 HEAD > REVISION')
+            local('git branch >> REVISION')
             local("tar -czf %s `cat FILES`" % archive)
             _status("Archive: %s"  % archive)
             env.archive = archive
