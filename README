@@ -27,3 +27,8 @@ not work.
 
 sudo apt-get install python-dev pip
 sudo pip install --upgrade fabric
+
+Resources
+---------
+* http://mmcgrana.github.com/2010/07/develop-deploy-clojure-web-applications.html
+

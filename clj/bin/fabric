@@ -1,4 +1,11 @@
 #!/bin/sh
+#
+# This script merges local configuration (.fabricrc) whith
+# the default configuration stored in the github repository.
+#
+# Usage: ./bin/fabric COMMANDS AS NORMAL
+#
 TFILE="/tmp/$(basename $0).$$.tmp"
 cat _fabricrc .fabricrc > $TFILE
 fab -c $TFILE $@
+rm -f $TFILE
