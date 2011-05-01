@@ -2,11 +2,12 @@ import os
 import sys
 import traceback
 from contextlib import contextmanager
-from fabric.api import run, local
+from fabric.api import run, local, settings
 from fabric.operations import put
 from fabric.context_managers import lcd, cd
 from fabric.utils import abort
 from fabric.state import output, env
+from fabric.contrib.console import confirm
 
 #
 # The following is based on default capistrano layouts
@@ -206,6 +207,7 @@ def create_revision():
             local('lein deps')
             local('LEIN_SNAPSHOTS_IN_RELEASE=true lein jar')
             local('git rev-list --max-count=1 HEAD > REVISION')
+            local("REV=`cat REVISION` echo \"<a href=\"https://github.com/ericdwhite/fmath/tree/${REV}\">github://ericdwhite/fmath ${REF}</a>\" > template/revision.html")
             local('git branch >> REVISION')
             local("tar -czf %s `cat FILES`" % archive)
             _status("Archive: %s"  % archive)
@@ -256,5 +258,19 @@ def symlink():
         _status("Symlinking to latest release: %s" % release)
 
     with cd(_get_attr('site_root')):
-        run("ln -sf %s %s" %(release, _get_attr('current_path')))
+        current = _get_attr('current_path')
+        run("rm -f %s" % current)
+        run("ln -sf %s %s" %(release, current)) 
 
+def restart():
+    """
+    Restarts the application using Upstart. 
+    """
+    _init()
+
+    with settings(warn_only=True):
+        result = run("sudo stop mwc")
+    if result.failed and not confirm("Stop failed. Continue anyway?"):
+        abort("Aborting at user request.")
+
+    run("sudo start mwc")
